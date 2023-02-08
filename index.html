@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>
+        Weather Forecasting
+    </h1>
+    <br/>
+
+    <label >Enter city name:<input type="text" id="city"></label>
+    
+    <br/>
+    <div id="btn"><button  onclick="getDetails()">Get Weather</button></div>
+    <div id="cn">Country-name:</div>
+    <div id="min">Minimum-Temperature:</div>
+    <div id="max">Maximum-Temperature:</div>
+    <div>
+  <canvas id="myChart"></canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        console.log("weather")
+        function getDetails(){
+            let xhttp=new XMLHttpRequest();
+            let city=document.getElementById("city").value 
+            console.log(city)
+            let url=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ac8cf9b4cd592a8460a400e37d1a212a&units=metric`
+            xhttp.open("GET",url,false)
+            xhttp.onreadystatechange=function(){
+                if(this.status==200 && this.readyState==4){
+                    let data=(JSON.parse(xhttp.responseText))
+                    console.log(data)
+                    let country=data.city.country
+                    let we=data.list
+                    var arr=[]
+                    var date5=[]
+                    let j=0
+                    document.getElementById("cn").innerHTML+=country
+                    document.getElementById("min").innerHTML+=we[0].main.temp_min
+                     document.getElementById("max").innerHTML+=we[0].main.temp_max
+
+                    for(var i=0;i<we.length;i=i+8){
+                        date=we[i].dt_txt
+                        let s=date.split(" ")
+                        date5[j]=s[0]
+                        arr[j]=we[i].main.temp
+                        j++
+                        
+                    }
+                    
+                         console.log(arr)
+                const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: date5,
+      datasets: [{
+        label: 'This information is about 5 day weather Forecast',
+        data: arr,
+        borderWidth: 1,
+        borderColor: '#FF6384',
+      backgroundColor: ['#FFB1C1','#9BD0F5','red','yellow','orange']
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+                    
+                }
+            }
+       
+            xhttp.send()
+
+        }
+    
+    </script>
+</body>
+</html>

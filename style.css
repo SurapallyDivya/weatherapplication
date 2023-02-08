@@ -1,0 +1,47 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: rgb(179, 234, 102);
+}
+h1{
+    text-align: center;
+    color: rgb(79, 27, 192);
+}
+label{
+    font-size: large;
+    color: rgb(130, 4, 94);
+    display: flex;
+            justify-content: center;
+            
+}
+#btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: chartreuse;
+    border-color: chartreuse;
+    height: 100px;
+}
+button{
+    background-color: rgb(255, 153, 0);
+    height: 50px;
+
+}
+#cn,#max,#min{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    color: rgb(213, 11, 14); 
+}
+#myChart{
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    margin-left: 350px;
+    margin-right: 350px;
+    margin-top: 80px;
+}
