@@ -32,7 +32,7 @@
             let xhttp=new XMLHttpRequest();
             let city=document.getElementById("city").value 
             console.log(city)
-            let url=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ac8cf9b4cd592a8460a400e37d1a212a&units=metric`
+            let url=`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ac8cf9b4cd592a8460a400e37d1a212a&units=metric`
             xhttp.open("GET",url,false)
             xhttp.onreadystatechange=function(){
                 if(this.status==200 && this.readyState==4){
