@@ -17,18 +17,18 @@
     
     <br/>
     <div id="btn"><button  onclick="getDetails()">Get Weather</button></div>
-    <div id="cn">Country-name:</div>
-    <div id="min">Minimum-Temperature:</div>
-    <div id="max">Maximum-Temperature:</div>
-    <div>
-  <canvas id="myChart"></canvas>
-</div>
+    <div id="cn"></div>
+    <div id="min"></div>
+    <div id="max"></div>
+    <div id="table"></div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+      
         console.log("weather")
         function getDetails(){
+  
             let xhttp=new XMLHttpRequest();
             let city=document.getElementById("city").value 
             console.log(city)
@@ -36,6 +36,9 @@
             xhttp.open("GET",url,false)
             xhttp.onreadystatechange=function(){
                 if(this.status==200 && this.readyState==4){
+                    document.getElementById("table").innerHTML=
+      '<canvas id="myChart"></canvas>'
+      var ctx = document.getElementById('myChart');
                     let data=(JSON.parse(xhttp.responseText))
                     console.log(data)
                     let country=data.city.country
@@ -43,9 +46,9 @@
                     var arr=[]
                     var date5=[]
                     let j=0
-                    document.getElementById("cn").innerHTML+=country
-                    document.getElementById("min").innerHTML+=we[0].main.temp_min
-                     document.getElementById("max").innerHTML+=we[0].main.temp_max
+                    document.getElementById("cn").innerHTML="Country"+country
+                    document.getElementById("min").innerHTML="Minimum-Temp:"+we[0].main.temp_min
+                     document.getElementById("max").innerHTML="Maximum-Temp:"+we[0].main.temp_max
 
                     for(var i=0;i<we.length;i=i+8){
                         date=we[i].dt_txt
@@ -57,7 +60,7 @@
                     }
                     
                          console.log(arr)
-                const ctx = document.getElementById('myChart');
+                
 
   new Chart(ctx, {
     type: 'bar',
